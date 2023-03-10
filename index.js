@@ -8,7 +8,7 @@ require('./database')
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: 'https://aaroncquinn.github.io',
     credentials: true
 }));
 app.use(cookieParser())
