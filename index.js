@@ -22,6 +22,6 @@ app.use('/api/login', loginRoute);
 const verifyRoute = require('./routes/verify');
 app.use('/api/verify', verifyRoute);
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is now listening on PORT ${PORT}.`);
 });
