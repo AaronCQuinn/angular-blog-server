@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     try {
       const getBlogs = await Blog.find({
         $or: [
-          { postedBy: "anonymous", createdAt: { $lt: threeDayFilter } },
+          { postedBy: "anonymous", createdAt: { $lt: ISODate(threeDayFilter) } },
           { postedBy: { $ne: "anonymous" } }
         ]
       }).sort({ createdAt: -1 });
