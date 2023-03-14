@@ -3,7 +3,7 @@ const router = express.Router();
 const Blog = require('../schema/BlogSchema');
 const Comment = require('../schema/CommentSchema')
 
-const threeDayFilter = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+const threeDayFilter = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
 router.get('/', async (req, res) => {
     try {
       const getBlogs = await Blog.find({
