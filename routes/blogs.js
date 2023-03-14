@@ -6,13 +6,19 @@ const Comment = require('../schema/CommentSchema')
 const threeDayFilter = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
 router.get('/', async (req, res) => {
     try {
-        const getBlogs = await Blog.find({ createdAt: { $gt: threeDayFilter }}).sort({ createdAt: -1 });
-        return res.status(200).send(getBlogs);
-    } catch(error) {
-        console.error(error);
-        return res.sendStatus(500);
+      const getBlogs = await Blog.find({
+        $or: [
+          { postedBy: "anonymous", createdAt: { $gt: threeDayFilter } },
+          { postedBy: { $ne: "anonymous" } }
+        ]
+      }).sort({ createdAt: -1 });
+      return res.status(200).send(getBlogs);
+    } catch (error) {
+      console.error(error);
+      return res.sendStatus(500);
     }
 })
+  
 
 router.get('/:blogId', async (req, res) => {
     const {blogId} = req.params;
